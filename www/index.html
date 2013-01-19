@@ -38,7 +38,6 @@
 
         <x-view class="details">
           <header><h1>Details</h1></header>
-          
           This item has the title "<span class="title">?</span>"
         </x-view>
       </x-view>
@@ -46,15 +45,15 @@
       <x-view class="bb84-window">
           <input type="text" id="xmin" placeholder="xmin" />
           <input type="text" id="xmax" placeholder="xmax" />
+          <input type="text" id="xscl" placeholder="xscl" />
           <input type="text" id="ymin" placeholder="ymin" />
-          <input type="text" id="ymax" placeholder="xmax" />
+          <input type="text" id="ymax" placeholder="ymax" />
+          <input type="text" id="yscl" placeholder="yscl" />
+          <input type="text" id="xres" placeholder="xres" />
       </x-view>
 
       <x-view class="bb84-graph">
-        <h1>Graph</h1>
-        <p>
-          This is yet another section. The button above does nothing.
-        </p>
+        <canvas id="canvas" width="280" height="280" />
       </x-view>
 
       <footer>

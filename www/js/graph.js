@@ -45,38 +45,44 @@
         xTickWidth = width / xTicks,
         yTicks = (config.ymax + -config.ymin) / config.yscl,
         yTickWidth = height / yTicks,
-        centerWidth = width / 2,
-        centerHeight = height / 2;
+        centerWidth = (Math.abs(config.xmin) - Math.abs(config.xmax)) * xTickWidth,
+        centerHeight = (Math.abs(config.ymin) - Math.abs(config.ymax)) * yTickWidth;
+
+    ctx.save();
+    ctx.translate(ctx.canvas.width / 2, ctx.canvas.height / 2);
+    ctx.scale(1, -1);
 
     // x-axis
     ctx.beginPath();
-    ctx.moveTo(0, centerHeight);
+    ctx.moveTo(-width, centerHeight);
     ctx.lineTo(width, centerHeight);
     ctx.stroke();
 
     // x-axis ticks
-    for (var i = 0, x = 0; i <= xTicks; i++, x += xTickWidth) {
+    for (var x = -width; x <= width; x += xTickWidth) {
       //console.log(i);
       ctx.beginPath();
-      ctx.moveTo(xTickWidth * i, centerHeight - 10);
-      ctx.lineTo(xTickWidth * i, centerHeight + 10);
+      ctx.moveTo(x, centerHeight - 10);
+      ctx.lineTo(x, centerHeight + 10);
       ctx.stroke();
     }
 
     // y-axis
     ctx.beginPath();
-    ctx.moveTo(centerWidth, 0);
+    ctx.moveTo(centerWidth, -height);
     ctx.lineTo(centerWidth, height);
     ctx.stroke();
 
     // y-axis ticks
-    for (var j = 0, y = 0; j <= yTicks; j++, y += yTickWidth) {
+    for (var y = -height; y <= height; y += yTickWidth) {
       //console.log(j);
       ctx.beginPath();
-      ctx.moveTo(centerWidth - 10, yTickWidth * j);
-      ctx.lineTo(centerWidth + 10, yTickWidth * j);
+      ctx.moveTo(centerWidth - 10, y);
+      ctx.lineTo(centerWidth + 10, y);
       ctx.stroke();
     }
+
+    ctx.restore();
     return [xTickWidth, yTickWidth];
     //console.log(centerWidth, centerHeight);
   };

@@ -23,7 +23,7 @@ define(function(require) {
     // Passing a function into $ delays the execution until the
     // document is ready
     $(function() {
-
+        graph.load();
         // List view
         /*var list = $('.list').get(0);
         list.add({ title: 'Cook yummy food',

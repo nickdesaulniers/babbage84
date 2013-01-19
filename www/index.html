@@ -22,9 +22,9 @@
           <header>
             <h1>Babbage84</h1>
           </header>
-          <input type="text" id="fOfX" placeholder="f(x)" />
-          <input type="text" id="gOfX" placeholder="g(x)" />
-          <input type="text" id="hOfX" placeholder="h(x)" />
+          <label>f(x)=<input type="text" id="fOfX" value="2" /></label><br />
+          <label>g(x)=<input type="text" id="gOfX" value="2x^2" /></label><br />
+          <label>h(x)=<input type="text" id="hOfX" value="(2x)^2" /></label><br />
           <!--<footer>
             <button data-view=".list">List</button>
           </footer>-->
@@ -43,13 +43,13 @@
       </x-view>
 
       <x-view class="bb84-window">
-          <input type="text" id="xmin" placeholder="xmin" />
-          <input type="text" id="xmax" placeholder="xmax" />
-          <input type="text" id="xscl" placeholder="xscl" />
-          <input type="text" id="ymin" placeholder="ymin" />
-          <input type="text" id="ymax" placeholder="ymax" />
-          <input type="text" id="yscl" placeholder="yscl" />
-          <input type="text" id="xres" placeholder="xres" />
+        <label>xmin:<input type="text" id="xmin" value="-10" /></label><br />
+        <label>xmax:<input type="text" id="xmax" value="10" /></label><br />
+        <label>xscl:<input type="text" id="xscl" value="1" /></label><br />
+        <label>ymin:<input type="text" id="ymin" value="-10" /></label><br />
+        <label>ymax:<input type="text" id="ymax" value="10" /></label><br />
+        <label>yscl:<input type="text" id="yscl" value="1" /></label><br />
+        <label>xres:<input type="text" id="xres" value="1" /></label><br />
       </x-view>
 
       <x-view class="bb84-graph">

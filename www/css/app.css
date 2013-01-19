@@ -30,6 +30,22 @@ canvas {
   display: block;
 }
 
+input {
+  width: 100%;
+}
+
+input#fOfX {
+  color: red;
+}
+
+input#gOfX {
+  color: green;
+}
+
+input#hOfX {
+  color: blue;
+}
+
 x-view .contents {
     padding: 1em;
 }

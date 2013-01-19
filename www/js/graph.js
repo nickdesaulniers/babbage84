@@ -91,17 +91,29 @@
         width = ctx.canvas.width;
 
     ctx.save();
-    ctx.translate(0, ctx.canvas.height / 2);
+    ctx.translate(ctx.canvas.width / 2, ctx.canvas.height / 2);
     ctx.scale(1, -1);
 
     [fOfX, gOfX, hOfX].forEach(function (equation, i) {
-      var y, colors = ['red', 'green', 'blue'], color = colors[i];
+      var y,
+          colors = ['red', 'green', 'blue'],
+          color = colors[i]
+          xTicks = ctx.canvas.width / xTickWidth;
 
       ctx.save();
       ctx.strokeStyle = color;
 
       if (xRE.test(equation)) {
         console.log(equation + ' contains x');
+        ctx.beginPath();
+        for (var i = 0; i < xTicks; i++) {
+          if (i === 0) {
+            ctx.moveTo(0, calculator.parse(replaceX(equation, 0)));
+          } else {
+            ctx.lineTo(i * yTickWidth, calculator.parse(replaceX(equation, i)));
+          }
+        }
+        ctx.stroke();
       } else {
         y = calculator.parse(equation) * yTickWidth;
         console.log(equation + ' does not contain x');

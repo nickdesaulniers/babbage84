@@ -41,6 +41,10 @@
     var ctx = onScreenContext,
         width = ctx.canvas.width,
         height = ctx.canvas.height,
+        xTicks = (config.xmax + -config.xmin) / config.xscl,
+        xTickWidth = width / xTicks,
+        yTicks = (config.ymax + -config.ymin) / config.yscl,
+        yTickWidth = height / yTicks,
         centerWidth = width / 2,
         centerHeight = height / 2;
 
@@ -51,8 +55,6 @@
     ctx.stroke();
 
     // x-axis ticks
-    var xTicks = (config.xmax + -config.xmin) / config.xscl;
-    var xTickWidth = width / xTicks;
     for (var i = 0, x = 0; i <= xTicks; i++, x += xTickWidth) {
       //console.log(i);
       ctx.beginPath();
@@ -68,8 +70,6 @@
     ctx.stroke();
 
     // y-axis ticks
-    var yTicks = (config.ymax + -config.ymin) / config.yscl;
-    yTickWidth = height / yTicks;
     for (var j = 0, y = 0; j <= yTicks; j++, y += yTickWidth) {
       //console.log(j);
       ctx.beginPath();

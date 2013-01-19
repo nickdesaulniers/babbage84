@@ -60,7 +60,6 @@
 
     // x-axis ticks
     for (var x = -width; x <= width; x += xTickWidth) {
-      //console.log(i);
       ctx.beginPath();
       ctx.moveTo(x, centerHeight - 10);
       ctx.lineTo(x, centerHeight + 10);
@@ -75,7 +74,6 @@
 
     // y-axis ticks
     for (var y = -height; y <= height; y += yTickWidth) {
-      //console.log(j);
       ctx.beginPath();
       ctx.moveTo(centerWidth - 10, y);
       ctx.lineTo(centerWidth + 10, y);
@@ -84,7 +82,6 @@
 
     ctx.restore();
     return [xTickWidth, yTickWidth];
-    //console.log(centerWidth, centerHeight);
   };
 
   var replaceX = function (equation, xVal) {
@@ -146,7 +143,6 @@
   graph.load = function () {
     var stats = getStats();
     var tickWidths = createGrid(stats);
-    //console.log(stats);
     plotAll(stats, tickWidths[0], tickWidths[1]);
   };
 

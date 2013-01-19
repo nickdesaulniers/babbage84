@@ -49,13 +49,13 @@
     ctx.stroke();
 
     // x-axis ticks
-    var numTicks = (config.xmax + -config.xmin) / config.xscl;
-    var tickWidth = width / numTicks;
-    for (var i = 0, x = 0; i <= numTicks; i++, x += tickWidth) {
+    var xTicks = (config.xmax + -config.xmin) / config.xscl;
+    var xTickWidth = width / xTicks;
+    for (var i = 0, x = 0; i <= xTicks; i++, x += xTickWidth) {
       //console.log(i);
       ctx.beginPath();
-      ctx.moveTo(tickWidth * i, centerHeight - 10);
-      ctx.lineTo(tickWidth * i, centerHeight + 10);
+      ctx.moveTo(xTickWidth * i, centerHeight - 10);
+      ctx.lineTo(xTickWidth * i, centerHeight + 10);
       ctx.stroke();
     }
 
@@ -66,15 +66,16 @@
     ctx.stroke();
 
     // y-axis ticks
-    numTicks = (config.ymax + -config.ymin) / config.yscl;
-    tickWidth = height / numTicks;
-    for (var j = 0, y = 0; j <= numTicks; j++, y += tickWidth) {
+    var yTicks = (config.ymax + -config.ymin) / config.yscl;
+    yTickWidth = height / yTicks;
+    for (var j = 0, y = 0; j <= yTicks; j++, y += yTickWidth) {
       //console.log(j);
       ctx.beginPath();
-      ctx.moveTo(centerWidth - 10, tickWidth * j);
-      ctx.lineTo(centerWidth + 10, tickWidth * j);
+      ctx.moveTo(centerWidth - 10, yTickWidth * j);
+      ctx.lineTo(centerWidth + 10, yTickWidth * j);
       ctx.stroke();
     }
+    return [xTickWidth, yTickWidth];
     //console.log(centerWidth, centerHeight);
   };
 
@@ -82,31 +83,43 @@
     return equation.replace(xRE, '(' + xVal + ')');
   };
 
-  var plotAll = function () {
+  var plotAll = function (xTickWidth, yTickWidth) {
     var fOfX = $('fOfX').value,
         gOfX = $('gOfX').value,
         hOfX = $('hOfX').value,
-        ctx = onScreenContext;
+        ctx = onScreenContext,
+        width = ctx.canvas.width;
 
-    [fOfX, gOfX, hOfX].forEach(function (equation) {
+    ctx.save();
+    ctx.translate(0, ctx.canvas.height / 2);
+    ctx.scale(1, -1);
+
+    [fOfX, gOfX, hOfX].forEach(function (equation, i) {
+      var y, colors = ['red', 'green', 'blue'], color = colors[i];
+
+      ctx.save();
+      ctx.strokeStyle = color;
+
       if (xRE.test(equation)) {
-        var y = calculator.parse(equation);
         console.log(equation + ' contains x');
+      } else {
+        y = calculator.parse(equation) * yTickWidth;
+        console.log(equation + ' does not contain x');
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(width, y);
         ctx.stroke();
-      } else {
-        console.log(equation + ' does not contain x');
       }
+      ctx.restore();
     });
+    ctx.restore();
   };
 
   graph.load = function () {
     var stats = getStats();
+    var tickWidths = createGrid(stats);
     //console.log(stats);
-    createGrid(stats);
-    plotAll();
+    plotAll(tickWidths[0], tickWidths[1]);
   };
 
   window.graph = graph;

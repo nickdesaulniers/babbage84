@@ -118,7 +118,7 @@
         y = calculator.parse(equation) * yTickWidth;
         console.log(equation + ' does not contain x');
         ctx.beginPath();
-        ctx.moveTo(0, y);
+        ctx.moveTo(-width, y);
         ctx.lineTo(width, y);
         ctx.stroke();
       }

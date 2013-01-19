@@ -13,15 +13,17 @@
       onScreenCanvas = document.getElementById('canvas'),
       onScreenContext = onScreenCanvas.getContext('2d'),
       offScreenCanvas = document.createElement('canvas'),
-      xRE = /x/g;
+      xRE = /x/,
+      xREg = /x/g;
 
   offScreenCanvas.width = onScreenCanvas.width;
   offScreenCanvas.height = onScreenCanvas.heigth;
 
   var offScreenContext = offScreenCanvas.getContext('2d');
 
-  function $(id) { return document.getElementById(id); };
-  function _(id) { return parseInt($(id).value, 10); }
+  function $ (id) { return document.getElementById(id); };
+  function _ (id) { return parseInt($(id).value, 10); };
+  function roundTwo (x) { return Math.round(x * 100) / 100; };
 
   var getStats = function () {
     return new Config(
@@ -80,7 +82,7 @@
   };
 
   var replaceX = function (equation, xVal) {
-    return equation.replace(xRE, '(' + xVal + ')');
+    return equation.replace(xREg, '(' + xVal + ')');
   };
 
   var plotAll = function (config, xTickWidth, yTickWidth) {
@@ -107,18 +109,24 @@
         console.log(equation + ' contains x');
         ctx.beginPath();
         ctx.moveTo(-width / 2,
-                   calculator.parse(replaceX(equation, -width / xTickWidth)));
-        for (var i = -width / 2; i < width / 2; i += xTickWidth / config.xres) {
+                   calculator.parse(replaceX(equation, -width / xTickWidth))
+                   * yTickWidth
+                  );
+        for (var i = -width / 2; i <= width / 2; i += xTickWidth / config.xres) {
           var x, y;
           x = i;
-          y = calculator.parse(replaceX(equation, i / xTickWidth));
-          console.log('(' + x + ', ' + y + '), width: ' + width);
+          y = calculator.parse(replaceX(equation, i / xTickWidth)) * yTickWidth;
+
+          x = roundTwo(x * 100) / 100;
+          y = roundTwo(y * 100) / 100;
+
+          console.log('(' + x + ', ' + y + '), width: ' + width + ', i: ' + i);
           ctx.lineTo(x, y);
         }
         ctx.stroke();
       } else {
-        y = calculator.parse(equation) * yTickWidth;
         console.log(equation + ' does not contain x');
+        y = calculator.parse(equation) * yTickWidth;
         ctx.beginPath();
         ctx.moveTo(-width, y);
         ctx.lineTo(width, y);
@@ -137,8 +145,8 @@
   };
 
   graph.replot = function () {
-    var stats = getStats();
-
+    onScreenContext.clearRect(0, 0, onScreenCanvas.width, onScreenCanvas.height);
+    graph.load();
   };
 
   window.graph = graph;

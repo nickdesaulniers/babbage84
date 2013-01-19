@@ -24,6 +24,10 @@ define(function(require) {
     // document is ready
     $(function() {
         graph.load();
+
+        // brittle, but there's no time!!!!
+        document.getElementsByTagName('button')[2].addEventListener(
+          'click', graph.replot);
         // List view
         /*var list = $('.list').get(0);
         list.add({ title: 'Cook yummy food',

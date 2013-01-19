@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <!-- Use this installation button to install locally without going
+         through the marketpace (see app.js) -->
+    <!-- <button id="install-btn">Install</button>     -->
+
+    <x-view id="app">
+      <x-view class="bb84-y">
+        <x-view class="homesub">
+          <header>
+            <h1>Babbage84</h1>
+          </header>
+          <input type="text" id="fOfX" placeholder="f(x)" />
+          <input type="text" id="gOfX" placeholder="g(x)" />
+          <input type="text" id="hOfX" placeholder="h(x)" />
+          <!--<footer>
+            <button data-view=".list">List</button>
+          </footer>-->
+        </x-view>
+
+        <!--<x-listview class="list">
+          <header>
+            <h1>Items</h1>
+          </header>
+        </x-listview>-->
+
+        <x-view class="details">
+          <header><h1>Details</h1></header>
+          
+          This item has the title "<span class="title">?</span>"
+        </x-view>
+      </x-view>
+
+      <x-view class="bb84-window">
+          <input type="text" id="xmin" placeholder="xmin" />
+          <input type="text" id="xmax" placeholder="xmax" />
+          <input type="text" id="ymin" placeholder="ymin" />
+          <input type="text" id="ymax" placeholder="xmax" />
+      </x-view>
+
+      <x-view class="bb84-graph">
+        <h1>Graph</h1>
+        <p>
+          This is yet another section. The button above does nothing.
+        </p>
+      </x-view>
+
+      <footer>
+        <button data-view=".bb84-y">Y=</button>
+        <button data-view=".bb84-window">Window</button>
+        <button data-view=".bb84-graph">Graph</button>
+      </footer>
+    </x-view>
+
+    <div class="loading">Loading...</div>
+
+    <!-- Using require.js, a module system for javascript, include the
+         js files. This loads "main.js", which in turn can load other
+         files, all handled by require.js:
+         http://requirejs.org/docs/api.html#jsfiles -->
+    <script type="text/javascript"
+            data-main="js/init.js"
+            src="js/lib/require.js"></script>
+  </body>
+</html>

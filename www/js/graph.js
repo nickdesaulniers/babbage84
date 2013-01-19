@@ -83,7 +83,7 @@
     return equation.replace(xRE, '(' + xVal + ')');
   };
 
-  var plotAll = function (xTickWidth, yTickWidth) {
+  var plotAll = function (config, xTickWidth, yTickWidth) {
     var fOfX = $('fOfX').value,
         gOfX = $('gOfX').value,
         hOfX = $('hOfX').value,
@@ -108,7 +108,7 @@
         ctx.beginPath();
         ctx.moveTo(-width / 2,
                    calculator.parse(replaceX(equation, -width / xTickWidth)));
-        for (var i = -width / 2; i < width / 2; i += xTickWidth) {
+        for (var i = -width / 2; i < width / 2; i += xTickWidth / config.xres) {
           var x, y;
           x = i;
           y = calculator.parse(replaceX(equation, i / xTickWidth));
@@ -133,7 +133,12 @@
     var stats = getStats();
     var tickWidths = createGrid(stats);
     //console.log(stats);
-    plotAll(tickWidths[0], tickWidths[1]);
+    plotAll(stats, tickWidths[0], tickWidths[1]);
+  };
+
+  graph.replot = function () {
+    var stats = getStats();
+
   };
 
   window.graph = graph;

@@ -106,12 +106,14 @@
       if (xRE.test(equation)) {
         console.log(equation + ' contains x');
         ctx.beginPath();
-        for (var i = 0; i < xTicks; i++) {
-          if (i === 0) {
-            ctx.moveTo(0, calculator.parse(replaceX(equation, 0)));
-          } else {
-            ctx.lineTo(i * yTickWidth, calculator.parse(replaceX(equation, i)));
-          }
+        ctx.moveTo(-width / 2,
+                   calculator.parse(replaceX(equation, -width / xTickWidth)));
+        for (var i = -width / 2; i < width / 2; i += xTickWidth) {
+          var x, y;
+          x = i;
+          y = calculator.parse(replaceX(equation, i / xTickWidth));
+          console.log('(' + x + ', ' + y + '), width: ' + width);
+          ctx.lineTo(x, y);
         }
         ctx.stroke();
       } else {

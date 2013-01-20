@@ -41,9 +41,9 @@
     var ctx = onScreenContext,
         width = ctx.canvas.width,
         height = ctx.canvas.height,
-        xTicks = (config.xmax + -config.xmin) / config.xscl,
+        xTicks = (config.xmax - config.xmin) / config.xscl,
         xTickWidth = width / xTicks,
-        yTicks = (config.ymax + -config.ymin) / config.yscl,
+        yTicks = (config.ymax - config.ymin) / config.yscl,
         yTickWidth = height / yTicks,
         centerWidth = (Math.abs(config.xmin) - Math.abs(config.xmax)) * xTickWidth,
         centerHeight = (Math.abs(config.ymin) - Math.abs(config.ymax)) * yTickWidth;
@@ -109,7 +109,7 @@
       ctx.strokeStyle = color;
 
       if (xRE.test(equation)) {
-        console.log(equation + ' contains x');
+        //console.log(equation + ' contains x');
         ctx.beginPath();
         ctx.moveTo(-width / 2,
                    calculator.parse(replaceX(equation, -width / xTickWidth))
@@ -123,12 +123,12 @@
           x = roundTwo(x * 100) / 100;
           y = roundTwo(y * 100) / 100;
 
-          console.log('(' + x + ', ' + y + '), width: ' + width + ', i: ' + i);
+          //console.log('(' + x + ', ' + y + '), width: ' + width + ', i: ' + i);
           ctx.lineTo(x, y);
         }
         ctx.stroke();
       } else {
-        console.log(equation + ' does not contain x');
+        //console.log(equation + ' does not contain x');
         y = calculator.parse(equation) * yTickWidth;
         ctx.beginPath();
         ctx.moveTo(-width, y);

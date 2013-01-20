@@ -30,6 +30,20 @@ js/lib/require.js
 manifest.webapp
 js/calculator.js
 js/graph.js
+js/lib/receiptverifier.js
+js/lib/layouts/layouts.js
+js/install-button.js
+js/lib/zepto.js
+js/lib/x-tag.js
+js/lib/layouts/view.js
+js/lib/layouts/list.js
+js/lib/install.js
+js/lib/underscore.js
+js/lib/layouts/anim.js
+js/lib/layouts/header.js
+js/lib/backbone.js
+js/lib/layouts/footer.js
+js/lib/layouts/css-animations.js
 
 # catch-all for anything else
 NETWORK:
